@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<div th:fragment="rt2">
+	<h6 class=" cus-input-title">Rate</h6>
+	<select class="form-style" id="ratepicker"></select>
+
+
+
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+
+	<script>
+		$('#ratepicker').each(
+				function() {
+
+					var till = 10;
+					for (var i = 0; i <= 10; i++) {
+
+						$(this).append(
+								'<option selected value="' + (i) + '">' + (i)
+										+ '</option>');
+
+					}
+
+				});
+
+		$('#ratepicker').val(document.getElementById('rti').value);
+
+		$('#ratepicker').on(
+				'change',
+				function() {
+					document.getElementById('rti').value = document
+							.getElementById('ratepicker').value;
+				});
+	</script>
+
+</div>
+</html>

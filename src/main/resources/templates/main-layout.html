@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap}"
+	rel="stylesheet">
+
+
+<!-- Bootstrap core CSS -->
+<!--        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" /> -->
+<!-- 	<link rel="stylesheet" th:href="@{//g.tutorialjinni.com/mojoaxel/bootstrap-select-country/dist/css/bootstrap-select-country.min.css}" /> -->
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+
+
+
+<!-- Additional CSS Files -->
+<link th:href="@{/assets/css/styles.css}" rel="stylesheet">
+<link th:href="@{/assets/css/sidebar.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/assets/css/add-fragment.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/fontawesome.css}">
+<link rel="stylesheet"
+	th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/solid.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/css/templatemo-cyborg-gaming.css}">
+<!-- <link rel="stylesheet" th:href="@{/assets/css/owl.css}">
+<link rel="stylesheet" th:href="@{/assets/css/animate.css}"> -->
+<link rel="stylesheet"
+	th:href="@{https://unpkg.com/swiper@7/swiper-bundle.min.css}" />
+
+<link rel='stylesheet'
+	th:href='@{https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css}'>
+
+
+
+
+<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">ELECTRXH</title>
+
+<style>
+/* Default styles for all screens */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col-lg-12 {
+	flex-basis: 100%;
+}
+
+@media ( max-width : 992px) {
+	.container {
+		padding: 0 10px;
+	}
+	.col-lg-12 {
+		flex-basis: 100%;
+	}
+	.sidebar {
+		top: 70px;
+		height: calc(100% - 70px);
+	}
+	.header-area {
+		position: fixed;
+		width: 100%;
+		z-index: 102;
+	}
+}
+/* Styles for screens smaller than 768px */
+@media ( max-width : 768px) {
+	.container {
+		padding: 0 10px;
+	}
+	.col-lg-12 {
+		flex-basis: 100%;
+	}
+	.sidebar {
+		top: 70px;
+		height: calc(100% - 70px);
+	}
+	.header-area {
+		position: fixed;
+		width: 100%;
+		z-index: 102;
+	}
+}
+
+/* Styles for screens smaller than 480px */
+@media ( max-width : 480px) {
+	.container {
+		padding: 0;
+	}
+	.col-lg-12 {
+		flex-basis: 100%;
+	}
+	.sidebar {
+		top: 70px;
+		height: calc(100% - 70px);
+	}
+	.header-area {
+		position: fixed;
+		width: 100%;
+		z-index: 102;
+	}
+}
+</style>
+</head>
+
+
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+	<div class="preloader-inner">
+		<span class="dot"></span>
+		<div class="dots">
+			<span></span> <span></span> <span></span>
+		</div>
+	</div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<div th:replace="~{fragments/bar-fragment.html :: bar}"></div>
+
+<div sec:authorize="isAuthenticated()">
+
+	<div class="container">
+		<div class="sidebar">
+			<div class="logo-details">
+				<i class='bx bxs-label icon'></i>
+				<div class="logo_name">ELECTRXH</div>
+				<i class='bx bx-chevron-right' id="btn"></i>
+			</div>
+			<div style="margin-top: 90px;"></div>
+			<ul class="nav-list">
+				<li><i class='bx bx-search'></i>
+					<form id="search" th:action="@{/search}" method="get">
+						<input type="text" placeholder="Search..." name="q">
+					</form> <span class="tooltip">Search</span></li>
+				<li><a th:href="@{/home}"> <i class='bx bx-home'></i> <span
+						class="links_name">Home</span>
+				</a> <span class="tooltip">Home</span></li>
+
+
+				<li><a th:href="@{/profile#contributions}"> <i class='bx bx-user'></i> <span
+						class="links_name">Contributions</span>
+				</a> <span class="tooltip">Contributions</span></li>
+
+
+
+				<li><a th:href="@{/add_laptop#add-section}"> <i
+						class='bx bx-laptop'></i> <span class="links_name">Add New
+							Laptop</span>
+				</a> <span class="tooltip">New Laptop</span></li>
+
+
+				<li><a th:href="@{/view_tech}"> <i class='bx bx-star'></i>
+						<span class="links_name">Top Deals</span>
+				</a> <span class="tooltip">Top Deals</span></li>
+
+
+				<li class="profile">
+					<div class="profile-details">
+						<div class="fa fa-user fa-lg"
+							style="margin-right: 2rem; font-size: 40px;"></div>
+						<div class="name_job">
+							<div class="name" th:text="${user.username}"></div>
+							<div class="job" th:text="${user.email}"></div>
+						</div>
+					</div> <a th:href="@{/logout}"> <i class='bx bx-log-out' id="log_out"></i></a>
+				</li>
+			</ul>
+		</div>
+		<!-- ***** Header Area End ***** -->
+	</div>
+</div>
+<body class="home-section" layout:fragment="body">
+
+
+</body>
+<script th:src="@{/assets/js/sidebar.js}"></script>
+
+</html>

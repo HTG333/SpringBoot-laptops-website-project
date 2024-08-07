@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<div th:fragment="rt">
+	<h6 class=" cus-input-title">Rate</h6>
+	<select class="form-style" id="rate" name="rate"  th:field="*{rate}"  ></select>
+
+
+
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+
+	<script>
+		$('#rate').each(
+				function() {
+
+					var till = 10;
+					for (var i = 0; i <= 10; i++) {
+
+						$(this).append(
+								'<option selected value="' + (i) + '">' + (i)
+										+ '</option>');
+						
+						
+						
+					}
+					
+				
+
+				});
+					
+	
+	</script>
+
+</div>
+</html>

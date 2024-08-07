@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+
+
+
+
+
+<div th:fragment="edit">
+	<form role="form" method="post"
+		th:action="@{/edit/{lapId}(lapId=${laptop.lapId})}"
+		th:object="${laptop}">
+
+		<input type="hidden" th:field="*{lapId}"> <input type="hidden"
+			id="rti" th:field="*{rate}">
+
+		<div class="section">
+			<div class="container">
+				<div class="row full-height justify-content-center">
+					<div class="col-12 text-center align-self-center py-5">
+						<div class="section pb-5 pt-5 pt-sm-2 text-center">
+							<h6 class="mb-0 pb-3">
+								<span>Laptop Basic Info</span><span>Specifications</span>
+							</h6>
+							<input class="checkbox" type="checkbox" id="data-spec"
+								name="data-spec" /> <label for="data-spec"></label>
+							<div class="card-3d-wrap mx-auto">
+								<div class="card-3d-wrapper">
+									<div class="card-front">
+										<div class="center-wrap">
+											<div class="section text-center" id="edit-section">
+												<h4 style="margin-right: 25px;">LAPTOP BASIC INFO</h4>
+
+
+												<div class="row">
+													<div class="form-group">
+
+														<h6 class="cus-input-title">Model Name</h6>
+
+														<input class="form-style" placeholder="Enter Model Name"
+															autocomplete="off" th:field="*{model}"> <i
+															class="input-icon"></i> <br> <span
+															th:if="${#fields.hasErrors('model')}"
+															th:errors="*{model}" class="text-danger"></span>
+													</div>
+												</div>
+
+
+												<div class="row">
+													<div class="form-group mt-2">
+
+														<h6 class="cus-input-title">Brand</h6>
+
+														<input class="form-style" placeholder="Enter Brand Name "
+															autocomplete="off" name="brand" th:field="*{brand}">
+														<i class="input-icon"></i> <br> <span
+															th:if="${#fields.hasErrors('brand')}"
+															th:errors="*{brand}" class="text-danger"></span>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="form-group mt-2">
+
+														<h6 class="cus-input-title">Photo URL(Optional)</h6>
+
+														<input class="form-style"
+															placeholder="Enter Photo URL 'Optional' "
+															autocomplete="off" name="laptopPhotoUrl"
+															th:field="*{devPhotoUrl}"> <i class="input-icon"></i>
+													</div>
+												</div>
+
+
+												<div class="row">
+													<div class="form-group mt-2">
+
+														<h6 class="cus-input-title">Budget</h6>
+
+														<input class="form-style"
+															placeholder="Enter Laptop budget " autocomplete="off"
+															name="budget" th:field="*{budget}"> <i
+															class="input-icon"></i>
+													</div>
+												</div>
+
+
+
+
+
+
+
+
+
+
+												<div class="row">
+													<div class="form-group mt-2">
+														<div th:replace="~{fragments/rate-selector2.html :: rt2}"></div>
+
+
+													</div>
+												</div>
+
+												<a
+													onclick="document.getElementById('data-spec').checked=!document.getElementById('data-spec').checked;"
+													class="btn mt-4">Next</a>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="card-back">
+										<div class="center-wrap">
+											<div class="section text-center">
+												<h4 class="mb-4 pb-3">LAPTOP SPEC.S</h4>
+
+												<div class="row">
+													<div class="form-group" style="display: flex;">
+
+														<h6 class="cus-input-title" style="padding: 5px 0;">
+															<label for="cpu">CPU:</label>
+														</h6>
+
+														<input class="form-style" placeholder="Enter CPU Details"
+															autocomplete="off" id="cpu" name="cpu" th:field="*{cpu}">
+														<i class="input-icon"></i>
+
+
+													</div>
+													<br> <span th:if="${#fields.hasErrors('cpu')}"
+														th:errors="*{cpu}" class="text-danger"></span>
+												</div>
+
+												<div class="row">
+													<div class="form-group mt-4" style="display: flex;">
+
+														<h6 class="cus-input-title" style="padding: 5px 0;">
+															<label for="ram">RAM:</label>
+														</h6>
+
+														<input class="form-style" placeholder="Enter RAM Details"
+															autocomplete="off" id="ram" name="ram" th:field="*{ram}">
+														<i class="input-icon"></i>
+
+
+													</div>
+													<br> <span th:if="${#fields.hasErrors('ram')}"
+														th:errors="*{ram}" class="text-danger"></span>
+												</div>
+
+
+												<div class="row">
+													<div class="form-group mt-4" style="display: flex;">
+
+														<h6 class="cus-input-title" style="padding: 5px 0;">
+															<label for="hdd">HDD:</label>
+														</h6>
+
+														<input class="form-style" placeholder="Enter HDD Details"
+															autocomplete="off" id="hdd" name="hdd" th:field="*{hdd}">
+														<i class="input-icon"></i>
+
+
+
+
+														<h6 class="cus-input-title"
+															style="padding: 5px 0; padding-left: 35px;">
+															<label for="ssd">SSD:</label>
+														</h6>
+
+														<input class="form-style" placeholder="Enter SSD Details"
+															autocomplete="off" id="ssd" name="ssd" th:field="*{ssd}">
+														<i class="input-icon"></i>
+
+
+													</div>
+												</div>
+
+
+
+
+												<div class="row">
+													<div class="form-group mt-4" style="display: flex;">
+
+														<h6 class="cus-input-title" style="padding: 5px 0;">
+															<label for="display">Display:</label>
+														</h6>
+
+														<input class="form-style"
+															placeholder="Enter Display Details" autocomplete="off"
+															id="display" name="display" th:field="*{display}">
+														<i class="input-icon"></i>
+
+
+													</div>
+												</div>
+
+
+
+
+												<div class="row">
+													<div class="form-group mt-4" style="display: flex;">
+
+														<h6 class="cus-input-title" style="padding: 5px 0;">
+															<label for="graphics">Graphics:</label>
+														</h6>
+
+														<input class="form-style"
+															placeholder="Enter Graphics Details" autocomplete="off"
+															id="graphics" name="graphics" th:field="*{graphics}">
+														<i class="input-icon"></i>
+
+
+													</div>
+													<br> <span th:if="${#fields.hasErrors('graphics')}"
+														th:errors="*{graphics}" class="text-danger"></span>
+												</div>
+
+
+												<div class="row">
+													<div class="form-group mt-4" style="display: flex;">
+
+														<h6 class="" style="padding: 5px 0;">
+															<label for="notes">Notes about product:</label>
+														</h6>
+
+														<input class="form-style"
+															placeholder="Enter Extra Notes about the product'optional'"
+															autocomplete="off" id="notes" name="notes"
+															th:field="*{notes}"> <i class="input-icon"></i>
+
+
+													</div>
+												</div>
+
+
+
+
+
+
+
+												<button type="submit" class="btn mt-5">Edit Laptop</button>
+												<br> <a
+													onclick="document.getElementById('data-spec').checked=!document.getElementById('data-spec').checked;"
+													class="btn mt-2">back</a>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+</html>
+

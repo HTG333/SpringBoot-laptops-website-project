@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{main-layout}">
+
+<body layout:fragment="body">
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-content">
+
+
+					<div th:replace="~{fragments/details-fragment.html :: details}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p>
+						ELECTRXH© 2024 <a th:href="@{/home}">H LAPTOPS</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Scripts -->
+	<!-- Bootstrap core JavaScript -->
+	<!--     <script th:src="@{/vendor/jquery/jquery.min.js}"></script> -->
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+	<script
+		th:src="@{https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/js/owl-carousel.js}"></script>
+	<script th:src="@{/assets/js/tabs.js}"></script>
+	<script th:src="@{/assets/js/popup.js}"></script>
+	<script th:src="@{/assets/js/custom.js}"></script>
+
+
+</body>
+
+</html>

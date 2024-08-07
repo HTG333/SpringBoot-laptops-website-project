@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+
+<div th:fragment="details">
+
+
+
+	<!-- ***** Featured Start ***** -->
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="most-popular">
+				<div class="row">
+					<div class="col-lg-12 align-self-center ">
+						<div class="heading-section">
+							<h4>
+								<em>LAPTOP</em> INFO CARD
+							</h4>
+
+						</div>
+
+						<div class="thumb">
+
+							<a href="#specs"><img
+								th:with="url=${(laptop.devPhotoUrl) ?: ('/assets/images/lap_bck.jpg')}"
+								th:src="@{${url}}"
+								loading="lazy"
+								style="max-width: 100%; max-height: 100%; width: 550px; height: 450px; border: 6px solid black; border-radius: 23px; display: block; margin-left: auto; margin-right: auto; background-color: #fff; object-fit: contain;" />
+							</a>
+						</div>
+						<div class="main-button">
+							<a class="mt-2 "
+								style="text-align: center; color: #e5b80b; bottom: 2.2rem; background-color: black; cursor: default;">
+								<span th:text="${laptop.model}"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ***** Featured End ***** -->
+
+	<!-- ***** Details Start ***** -->
+	<div class="game-details">
+		<div class="row">
+
+
+
+			<div class="most-popular" id="popular">
+
+				<div class="col-lg-12">
+					<h2 id="specs">Specifications</h2>
+				</div>
+
+				<div class="col-lg-12 ">
+					<div class="row">
+
+						<div class="col-lg-4 col-sm-5">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Model Name<br> <span th:text="${laptop.model}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-sm-5">
+
+							<div class="item" style="text-align: center;">
+
+								<h6 style="display: inline-block;">
+									Brand<br> <span th:text="${laptop.brand}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-sm-5">
+
+							<div class="item" style="text-align: center;">
+
+								<h6 style="display: inline-block;">
+									CPU<br> <span th:text="${laptop.cpu}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-sm-5">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									RAM<br> <span id="countryii" th:text="${laptop.ram}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-sm-5">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									HDD<br> <span th:text="${laptop.hdd}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-5">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									SSD<br> <span th:utext="${laptop.ssd}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-6">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Graphics<br> <span th:text="${laptop.graphics}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+
+						<div class="col-lg-6 col-sm-6">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Display<br> <span th:text="${laptop.display}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+
+
+						<div class="col-lg-6 col-sm-6">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Budget<br> <span th:text="${laptop.budget}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-6">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Overall Rate<br> <span th:text="${laptop.rate}"
+										style="color: #e5b80b; font-weight: bold;"></span>
+								</h6>
+
+							</div>
+						</div>
+
+						<div class="col-lg-6 col-sm-6">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Category "Best For"<br> <span id="categorySpan"
+										style="color: #e5b80b; font-weight: bold;">-</span>
+
+								</h6>
+								<div th:attr="data-notes=${laptop.notes}"></div>
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-6">
+
+							<div class="item" style="text-align: center;">
+								<h6 style="display: inline-block;">
+									Status<br> <span id="statSpan"
+										style="color: #e5b80b; font-weight: bold;">-</span>
+								</h6>
+
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+
+
+				<div style="padding-bottom: 40px;"></div>
+
+
+
+
+
+
+
+
+
+				<div class="main-button">
+					<a id="offerBtn">Visit offer link</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+
+	<script th:src="@{/assets/js/details-fragment.js}"></script>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+</html>
+

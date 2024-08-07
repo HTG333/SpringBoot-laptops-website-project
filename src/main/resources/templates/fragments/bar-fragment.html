@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+
+
+
+
+<div th:fragment="bar">
+	<header class="header-area header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo Start ***** -->
+						<a th:href="@{/home}" class="logo mt-3"
+							style="text-align: center; font-size: 14px; color: #666666;">
+							<img th:src="@{/assets/images/logo_ex.png}" alt="" id="logo_e" loading="lazy">
+						
+						</a>
+
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Search End ***** -->
+
+
+
+
+						<div class="search-input" sec:authorize="!isAuthenticated()">
+
+							<form id="search" th:action="@{/search}" method="get">
+								<input type="text" placeholder="Type Something" id='searchText'
+									name="q" onkeypress="handle" /> <i class="fa fa-search"></i>
+							</form>
+						</div>
+
+
+						<!-- ***** Search End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li><a th:href="@{/home}">Home <span class="fa fa-home"></span></a></li>
+							<li><a th:href="@{/view_tech}">Top Deals<span
+									class="fa fa-star"></span></a></li>
+
+							
+							<li sec:authorize="isAuthenticated()"><a class=" mt-2" th:href="@{/profile}"><span
+									th:text="${user.username}"></span> <span
+									class="fa fa-user fa-lg "></span></a></li>
+
+							<li sec:authorize="!isAuthenticated()"><a class=" mt-1"
+								th:href="@{/login_reg}">Sign In/Register <span
+									class="fa fa-sign-in"></span></a></li>
+
+						</ul>
+						<a class='menu-trigger'> <span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+</div>
+
+</html>
+

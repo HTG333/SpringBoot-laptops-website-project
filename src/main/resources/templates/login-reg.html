@@ -1,0 +1,213 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+
+<title>ELECTRXH-Login</title>
+<link
+	th:href="@{https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap}"
+	rel="stylesheet">
+
+
+<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+
+<link th:href="@{/assets/css/styles.css}" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/assets/css/add-fragment.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/fontawesome.css}">
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+	<div class="section">
+
+		<div th:if="${param.error}"
+			class="alert alert-danger  alert-dismissible" role="alert">
+			<a href="#" class="btn-sm btn-close" data-dismiss="alert"
+				aria-label="close" style="outline: none;"></a>
+
+			<h6>
+				<strong>OH NO! </strong>Invalid UserName or Password
+			</h6>
+
+
+		</div>
+
+		<div th:if="${param.fail}" class="alert alert-dark alert-dismissible">
+			<a href="#" class="btn-sm btn-close" data-dismiss="alert"
+				aria-label="close" style="outline: none;"></a>
+
+			<h6>
+				<strong>OH NO! </strong>UserName or Email already Exists
+			</h6>
+
+		</div>
+		
+		
+		<div th:if="${param.reg_fail}" class="alert alert-danger alert-dismissible">
+			<a href="#" class="btn-sm btn-close" data-dismiss="alert"
+				aria-label="close" style="outline: none;"></a>
+
+			<h6>
+				<strong>OH NO! </strong>Invalid Inputs
+			</h6>
+
+		</div>
+
+		<div th:if="${param.success}"
+			class="alert alert-success alert-dismissible">
+			<a href="#" class="btn-sm btn-close" data-dismiss="alert"
+				aria-label="close" style="outline: none;"></a>
+
+			<h6>
+				<strong>Congratulations! </strong>Your Account Had Been Created
+				Successfully!
+			</h6>
+
+		</div>
+
+
+
+		<div th:if="${param.logout}"
+			class="alert alert-success alert-dismissible">
+			<a href="#" class="btn-sm btn-close" data-dismiss="alert"
+				aria-label="close" style="outline: none;"></a>
+
+			<h6>You Have Been Logged out</h6>
+		</div>
+
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3">
+							<span>Sign In </span><span>Register</span>
+						</h6>
+						<input class="checkbox" type="checkbox" id="reg-log"
+							name="reg-log" /> <label for="reg-log"></label>
+
+						<div class="card-3d-wrap mx-auto"
+							style="max-height: 400px; max-width: 500px;">
+							<div class="card-3d-wrapper">
+								<form role="form" method="post" th:action="@{/login_reg}">
+									<div class="card-front">
+										<div class="center-wrap">
+											<div class="section text-center">
+
+												<h4 class="mb-4 pb-3">Sign In</h4>
+												<div class="form-group">
+													<input type="text" class="form-style"
+														placeholder="Enter Your UserName" name="username"
+														autocomplete="off"> <i
+														class="input-icon fa fa-user"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" class="form-style"
+														placeholder="Your Password" name="password"
+														autocomplete="off"> <i
+														class="input-icon fa fa-lock"></i>
+												</div>
+												<br>
+												<button type="submit" value="Log in" class="btn mt-4">Submit</button>
+
+											</div>
+										</div>
+									</div>
+								</form>
+
+								<div class="card-back">
+
+
+									<div class="center-wrap">
+
+										<div class="section text-center">
+
+
+											<h4 class="mb-4 pb-3" id="reg_card">Register</h4>
+
+											<form role="form" method="post" th:action="@{/reg/save}"
+												th:object="${reg_user}">
+
+
+												<div class="form-group">
+													<input type="text" class="form-style"
+														placeholder="Your Full Name" th:field="*{username}"
+														autocomplete="off"> <i
+														class="input-icon fa fa-user"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="email" class="form-style"
+														placeholder="Your Email" th:field="*{email}"
+														autocomplete="off"> <i class="input-icon fa fa-at"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" class="form-style"
+														placeholder="Your Password" autocomplete="off"
+														th:field="*{password}"> <i
+														class="input-icon fa fa-lock"></i>
+												</div>
+
+												<button type="submit" class="btn mt-4">Submit</button>
+											</form>
+
+										</div>
+
+
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+
+<script
+	th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+<script
+	th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+
+<script type="text/javascript">
+	var getUrlParameter = function getUrlParameter(sParam) {
+		var sPageURL = window.location.search.substring(1), sURLVariables = sPageURL
+				.split('&'), sParameterName, i;
+
+		for (i = 0; i < sURLVariables.length; i++) {
+			sParameterName = sURLVariables[i].split('=');
+
+			if (sParameterName[0] === sParam) {
+				return typeof sParameterName[1] === undefined ? true
+						: decodeURIComponent(sParameterName[1]);
+			}
+		}
+		return false;
+	};
+
+	var p = getUrlParameter('fail');
+	var p2 = getUrlParameter('reg_fail');
+	$("#reg-log").prop('checked',( p == 'true')||( p2 == 'true'));
+	
+</script>
+
+</html>

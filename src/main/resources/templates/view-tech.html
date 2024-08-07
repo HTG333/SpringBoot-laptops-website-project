@@ -1,0 +1,345 @@
+<!DOCTYPE html >
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{main-layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+<link rel="stylesheet" th:href="@{/assets/css/owl.css}">
+<link rel="stylesheet"
+	th:href="@{https://unpkg.com/simplebar/dist/simplebar.css}">
+<style type="text/css">
+@media ( max-width : 769px) {
+	.main-border-button {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.select-container {
+	display: flex; /* Use flexbox for layout */
+	justify-content: left; /* Center the elements horizontally */
+	align-items: center; /* Center the elements vertically */
+	height: 100px; /* Set a height for the container */
+	text-align: center;
+}
+
+.select-container select {
+	margin: 0 5px; /* Add margin around select elements */
+}
+
+.select-container label {
+	margin-left: 20px; /* Add margin around labels */
+}
+</style>
+
+</head>
+
+<body layout:fragment="body">
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-content">
+
+					<!-- ***** Banner Start ***** -->
+					<div class="main-banner"
+						style="background-image: url('assets/images/lp5.png');">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="header-text">
+									<h6 style="color: black;">Welcome To ELECTRXH Website</h6>
+									<h4 style="color: black;">
+										<em>Check <br></em> Top laptops
+									</h4>
+									<div class="main-button">
+										<a th:href="@{/home}">Back To Home Page</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- ***** Banner End ***** -->
+
+					<!-- ***** Top Deals Start ***** -->
+
+					<div class="gaming-library" id="latest-section">
+						<div class="row">
+							<div class="col-lg-8" style="width: 100%">
+								<div class="featured-games header-text">
+									<div class="heading-section">
+										<h4>
+											<em>Top Laptops</em> Offers
+										</h4>
+									</div>
+									<div th:if=" ${#lists.size(result)}!=0">
+
+										<div class="owl-features owl-carousel">
+
+											<div class="item" th:each="laptop:${result}"
+												th:if="${laptop.type}==Deal">
+
+												<div class="thumb">
+
+													<article class="card__article">
+														<img
+															th:with="url=${(laptop.devPhotoUrl) ?: ('/assets/images/lap_bck.jpg')}"
+															th:src="@{${url}}"
+															style="height: 200px; object-fit: contain; background-color: #fff; background-size: cover;"
+															loading="lazy"
+															alt="">
+
+														<div class="card__data" style="bottom: -7rem; width: 95%;">
+															<h6 th:text="${laptop.model}" style="color: #e5b80b;"></h6>
+
+															<h3 th:text="${laptop.brand}" style="color: #fff;"></h3>
+
+															<h4>
+																<a
+																	th:href="@{/laptop_details/{lapId}(lapId=${laptop.lapId})}"
+																	class="mt-2">View Details</a>
+															</h4>
+														</div>
+													</article>
+
+												</div>
+
+
+
+
+
+
+												<ul>
+													<li>
+
+
+
+
+														<div sec:authorize="isAuthenticated()">
+															<div sec:authorize="hasAuthority('Admin')">
+
+																<div class="main-border-button "
+																	style="display: inline-flex; margin-right: 15px;">
+
+																	<a th:href="@{/edit/{lapId}(lapId=${laptop.lapId})}">&#160;&#160;&#160;Edit&#160;&#160;&#160;</a>
+																	&#160;&#160; <a class="delete-btn"
+																		th:href="@{/delete/{lapId}(lapId=${laptop.lapId})}">Delete</a>
+																</div>
+
+															</div>
+
+
+															<div sec:authorize="hasAuthority('User')"
+																th:if="${user.userId}==${laptop.createdBy.userId}">
+																<div class="main-border-button "
+																	style="display: inline-flex; margin-right: 15px;">
+																	<a th:href="@{/edit/{lapId}(lapId=${laptop.lapId})}">&#160;&#160;&#160;Edit&#160;&#160;&#160;</a>
+																	&#160;&#160; <a class="delete-btn"
+																		th:href="@{/delete/{lapId}(lapId=${laptop.lapId})}">Delete</a>
+
+																</div>
+															</div>
+														</div>
+													</li>
+
+												</ul>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<!-- ***** Top Deals End ***** -->
+
+
+					<!-- *****  Laptops deals filters Start ***** -->
+					<div class="most-popular">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="heading-section">
+									<h4>
+										<em>Available </em>Offers
+									</h4>
+								</div>
+
+								<div th:if="${#lists.size(result)}!=0">
+
+
+									<div class="select-container">
+
+										<!-- Filter Select -->
+										<span> <label for="brand-filter-select2">
+												Brand:&#160; </label></span> <select class="selector"
+											name="brand-filter-select2" id="brand-filter-select2">
+											<option value="all">All Laptops</option>
+											<option value="Asus">Asus</option>
+											<option value="Lenovo">Lenovo</option>
+											<option value="HP">HP</option>
+											<option value="Dell">Dell</option>
+											<option value="Acer">Acer</option>
+											<option value="Microsoft">Microsoft</option>
+											<option value="LG">LG</option>
+											<option value="apple">Apple</option>
+											<option value="alienware">AlienWare</option>
+											<option value="Razer">Razer</option>
+											<option value="MSI">MSI</option>
+										</select>
+
+
+										<!-- Filter Select -->
+										<span> <label for="cat-filter-select2">
+												Category:&#160; </label></span> <select class="selector"
+											name="cat-filter-select2" id="cat-filter-select2">
+											<option value="all">All Laptops</option>
+											<option value="Gaming">Gaming</option>
+											<option value="student">Student</option>
+											<option value="professional">Professional</option>
+											<option value="360X">360X</option>
+										</select>
+
+
+										<!-- Filter Select -->
+										<span> <label for="budget-filter-select">
+												Budget:&#160; </label></span> <select class="selector"
+											name="budget-filter-select" id="budget-filter-select">
+											<option value="all">All Laptops</option>
+											<option value="'High/Extreme-High'">High/Extreme-High</option>
+											<option value="'Medium'">Medium</option>
+											<option value="'Low'">Low</option>
+
+
+										</select>
+
+
+
+									</div>
+
+
+								</div>
+
+								<div id="myCustomScrollbar"
+									style="height: auto; max-height: 700px; overflow-y: auto; overflow-x: hidden;">
+
+
+
+									<div class="row">
+
+
+
+
+
+										<div class="col-lg-4 col-sm-4 mt-4 laptop-item2"
+											th:each="laptop:${result}" th:if="${laptop.type}==Deal"
+											th:attr="data-brand=${laptop.brand},data-category=${laptop.notes},data-budget=${laptop.budget}">
+
+
+											<div class="item" th:attr="data-lapid=${laptop.lapId}">
+
+												<article class="card__article">
+													<img
+														th:with="url=${(laptop.devPhotoUrl) ?: ('/assets/images/lap_bck.jpg')}"
+														th:src="@{${url}}"
+														style="height: 200px; object-fit: contain; background-color: #fff; background-size: cover;"
+														loading="lazy"
+														alt="">
+
+
+
+													<div class="card__data"
+														style="bottom: -10rem; width: 90%; height: 200px;">
+														<h6 th:text="${laptop.model}" style="color: #e5b80b;"></h6>
+
+														<h3 th:text="${laptop.brand}" style="color: #fff;"></h3>
+														<br>
+														<div sec:authorize="isAuthenticated()">
+															<div sec:authorize="hasAuthority('Admin')">
+																<a th:href="@{/edit/{lapId}(lapId=${laptop.lapId})}">Edit</a>
+																&#160;&#160;<a class="delete-btn"
+																	th:href="@{/delete/{lapId}(lapId=${laptop.lapId})}">Delete</a>
+															</div>
+															<div sec:authorize="hasAuthority('User')"
+																th:if="${user.userId}==${laptop.createdBy.userId}">
+
+																<a th:href="@{/edit/{lapId}(lapId=${laptop.lapId})}">Edit</a>
+																&#160;&#160;<a class="delete-btn"
+																	th:href="@{/delete/{lapId}(lapId=${laptop.lapId})}">Delete</a>
+															</div>
+														</div>
+														<h4>
+															<a
+																th:href="@{/laptop_details/{lapId}(lapId=${laptop.lapId})}"
+																class="mt-2">View Details</a>
+														</h4>
+													</div>
+
+
+												</article>
+												<h4 th:text="${laptop.model}" style="color: #e5b80b;"></h4>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- *****  Laptops deals filters Ends ***** -->
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p>
+						ELECTRXH© 2024 <a th:href="@{/home}">H LAPTOPS</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Scripts -->
+	<!-- Bootstrap core JavaScript -->
+	<!--     <script th:src="@{/vendor/jquery/jquery.min.js}"></script> -->
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+	<script
+		th:src="@{https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/js/owl-carousel.js}"></script>
+	<script th:src="@{/assets/js/tabs.js}"></script>
+	<script th:src="@{/assets/js/popup.js}"></script>
+	<script th:src="@{/assets/js/custom.js}"></script>
+	<script th:src="@{/assets/js/laptops-filters.js}"></script>
+	<script th:src="@{https://unpkg.com/simplebar/dist/simplebar.min.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+
+			var scroll1 = document.getElementById('myCustomScrollbar')
+			if (scroll1) {
+				new SimpleBar(scroll1);
+			}
+		})
+	</script>
+
+
+</body>
+
+</html>

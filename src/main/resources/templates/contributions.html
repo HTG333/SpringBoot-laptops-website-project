@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{main-layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+<link rel="stylesheet"
+	th:href="@{https://unpkg.com/simplebar/dist/simplebar.css}">
+
+
+
+</head>
+
+<body layout:fragment="body">
+
+
+
+
+
+	<!-- ***** Container Start ***** -->
+
+
+	<div class="container">
+
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-content">
+
+					<!-- ***** Banner Start ***** -->
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="main-profile ">
+								<div class="row">
+									<div class="col-lg-4">
+										<img src="assets/images/user2.jpg" alt=""
+											 loading="lazy"
+											style="height: 300px; width: 200px; border-radius: 23px;">
+									</div>
+									<div class="col-lg-4 align-self-center">
+										<div class="main-info header-text">
+											<span>Active</span>
+											<h4 th:text="${#strings.toUpperCase(user.username)}"></h4>
+
+											<div class="main-border-button">
+												<a th:href="@{/view_tech}">Check Top Deals</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 align-self-center">
+										<ul>
+											<li>Role<br> <span th:each="role : ${user.roles}"
+												th:text="${role.name}"></span><br>
+											</li>
+											<li>Total Contributions<br> <span
+												th:text="${#lists.size(laptop)}"></span><br></li>
+
+
+										</ul>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="clips">
+											<div class="row">
+												<div class="col-lg-12">
+
+													<div th:if="${#lists.size(laptop)}!=0">
+														<div class="heading-section" id="contributions-header">
+															<h4>
+																<em>My</em> Contributions
+															</h4>
+														</div>
+													</div>
+												</div>
+												<!-- ***** contributions Start ***** -->
+												<div th:if="${#lists.size(laptop)}!=0">
+													<div class="col-lg-12" id="contributions">
+
+
+
+														<div id="myCustomScrollbar"
+															style="height: auto; max-height:500px; overflow-y: auto; overflow-x: hidden;">
+
+
+															<div class="row">
+
+
+
+																<div class="col-lg-4 col-sm-4 mt-4"
+																	th:each="laptop:${laptop}">
+																	<div class="item" th:attr="data-lapid=${laptop.lapId}">
+
+																		<article class="card__article">
+																			<img
+																				th:with="url=${(laptop.devPhotoUrl) ?: ('/assets/images/lap_bck.jpg')}"
+																				th:src="@{${url}}"
+																				style="height: 200px; object-fit: contain; background-color: #fff; background-size: cover;"
+																				loading="lazy"
+																				alt="">
+
+
+
+																			<div class="card__data"
+																				style="bottom: -10rem; width: 90%; height: 200px;">
+																				<h6 th:text="${laptop.model}"
+																					style="color: #e5b80b;"></h6>
+
+																				<h3 th:text="${laptop.brand}" style="color: #fff;"></h3>
+																				<br>
+																				<div sec:authorize="isAuthenticated()">
+
+																					<a
+																						th:href="@{/edit/{lapId}(lapId=${laptop.lapId})}">Edit</a>
+																					&#160;&#160;<a class="delete-btn"
+																						th:href="@{/delete/{lapId}(lapId=${laptop.lapId})}">Delete</a>
+
+
+																				</div>
+																				<h4>
+																					<a
+																						th:href="@{/laptop_details/{lapId}(lapId=${laptop.lapId})}"
+																						class="mt-2">View Details</a>
+																				</h4>
+																			</div>
+
+
+																		</article>
+																		<h4 th:text="${laptop.model}" style="color: #e5b80b;"></h4>
+
+
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- ***** contributions Ends ***** -->
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- ***** Banner End ***** -->
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ***** Container End ***** -->
+
+
+
+	<!-- ***** Footer start ***** -->
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p>
+						ELECTRXH© 2024 <a th:href="@{/home}">H LAPTOPS</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- ***** Footer end ***** -->
+
+
+	<!-- Scripts -->
+	<!-- Bootstrap core JavaScript -->
+	<!--     <script th:src="@{/vendor/jquery/jquery.min.js}"></script> -->
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+	<script
+		th:src="@{https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/js/owl-carousel.js}"></script>
+	<script th:src="@{/assets/js/tabs.js}"></script>
+	<script th:src="@{/assets/js/popup.js}"></script>
+	<script th:src="@{/assets/js/custom.js}"></script>
+	<script th:src="@{/assets/js/laptops-filters.js}"></script>
+	<script th:src="@{https://unpkg.com/simplebar/dist/simplebar.min.js}"></script>
+
+	<script>
+		$(document).ready(function() {
+
+			var scroll1 = document.getElementById('myCustomScrollbar')
+			if (scroll1) {
+				new SimpleBar(scroll1);
+			}
+		});
+	</script>
+
+
+</body>
+
+</html>

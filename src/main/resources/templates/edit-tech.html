@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{main-layout}">
+
+<body layout:fragment="body">
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-content">
+
+
+					<!-- ***** Most Popular Start ***** -->
+					<div class="most-popular" id="popular">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="heading-section" id="edit_section">
+									<h4>
+										<em>Edit</em> Laptop Data
+									</h4>
+								</div>
+								<div class="row">
+
+									<div th:replace="~{fragments/edit-fragment.html :: edit}"></div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ***** Most Popular End ***** -->
+
+			</div>
+		</div>
+	</div>
+
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<p>
+						ELECTRXH© 2024 <a th:href="@{/home}">H Laptops</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Scripts -->
+	<!-- Bootstrap core JavaScript -->
+
+	<!--     <script th:src="@{/vendor/jquery/jquery.min.js}"></script> -->
+	<script
+		th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+	<!--  <script th:src="@{/assets/js/isotope.min.js}"></script> -->
+	<script
+		th:src="@{https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/assets/js/owl-carousel.js}"></script>
+	<script th:src="@{/assets/js/tabs.js}"></script>
+	<script th:src="@{/assets/js/popup.js}"></script>
+	<script th:src="@{/assets/js/custom.js}"></script>
+	<script th:if="${scrollToErrorSection}">
+		document.addEventListener('DOMContentLoaded', function() {
+			var errorSection = document.getElementById('edit-section');
+			if (errorSection) {
+				errorSection.scrollIntoView({
+					behavior : 'smooth',
+					block : 'start'
+				});
+			}
+		});
+	</script>
+
+
+
+</body>
+
+</html>
